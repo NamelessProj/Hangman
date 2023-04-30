@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hangman</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="cont">
+        <section class="useless">
+            <div class="total-words">There's <strong class="total-words-num"></strong> words waiting on your guess.</div>
+        </section>
+
+        <section class="title">
+            <h1>Hangman</h1>
+        </section>
+
+        <section class="scores">
+            <div><strong>Consecutive guess:</strong> <span class="consecutive">0</span></div>
+
+            <div><strong>Lives:</strong> <span class="current-live"></span> / <span class="total-live"></span></div>
+
+            <div><strong>Max consecutive guess:</strong> <span class="max-consecutive">0</span></div>
+        </section>
+
+        <section class="options">
+            <button type="button" class="retry-btn">
+                <svg xmlns="https://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 512 512">
+                    <path d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"/>
+                </svg>
+            </button>
+        </section>
+
+        <section class="word-seek"></section>
+
+        <section class="buttons">
+            <button type="button" class="input-btn" data-letter>A</button>
+            <button type="button" class="input-btn" data-letter>B</button>
+            <button type="button" class="input-btn" data-letter>C</button>
+            <button type="button" class="input-btn" data-letter>D</button>
+            <button type="button" class="input-btn" data-letter>E</button>
+            <button type="button" class="input-btn" data-letter>F</button>
+            <button type="button" class="input-btn" data-letter>G</button>
+            <button type="button" class="input-btn" data-letter>H</button>
+            <button type="button" class="input-btn" data-letter>I</button>
+            <button type="button" class="input-btn" data-letter>J</button>
+            <button type="button" class="input-btn" data-letter>K</button>
+            <button type="button" class="input-btn" data-letter>L</button>
+            <button type="button" class="input-btn" data-letter>M</button>
+            <button type="button" class="input-btn" data-letter>N</button>
+            <button type="button" class="input-btn" data-letter>O</button>
+            <button type="button" class="input-btn" data-letter>P</button>
+            <button type="button" class="input-btn" data-letter>Q</button>
+            <button type="button" class="input-btn" data-letter>R</button>
+            <button type="button" class="input-btn" data-letter>S</button>
+            <button type="button" class="input-btn" data-letter>T</button>
+            <button type="button" class="input-btn" data-letter>U</button>
+            <button type="button" class="input-btn" data-letter>V</button>
+            <button type="button" class="input-btn" data-letter>W</button>
+            <button type="button" class="input-btn" data-letter>X</button>
+            <button type="button" class="input-btn" data-letter>Y</button>
+            <button type="button" class="input-btn" data-letter>Z</button>
+        </section>
+    </div>
+
+    <script src="words_dictionary.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
