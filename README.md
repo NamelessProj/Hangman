@@ -1,5 +1,7 @@
 # Hangman Game
 
+[Live preview](https://namelessproj.github.io/Hangman/)
+
 A simple hangman game with 370k words that you can guess.
 
 ## How to play
