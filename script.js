@@ -35,12 +35,12 @@ class Hangman {
     }
 
     generate_word(){       
-        console.log(this.newWord);
+        //console.log(this.newWord);
 
         var newWord = this.toNormalForm(DICTIONARY_ENG[Math.floor(Math.random()*DICTIONARY_ENG.length)].toUpperCase());
 
         wordSeekSection.innerHTML = '';
-        console.log(newWord);
+        //console.log(newWord);
 
         this.newWord = newWord;
         this.live = 9; // reset the live
@@ -49,7 +49,7 @@ class Hangman {
         totalLiveEl.innerText = remainingLiveEl.innerText = this.live;
 
         for(let i = 0; i < newWord.length; i++){
-            console.log(newWord[i]);
+            //console.log(newWord[i]);
             if(/^[a-zA-Z]/.test(newWord[i])){
                 wordSeekSection.innerHTML += '<div class="word-seek-letter" data-letter-box="'+i+'"></div>';
                 this.wordLength++;
@@ -71,8 +71,8 @@ class Hangman {
         if(e.classList.contains('clicked')) return;
 
         var letter = e.innerText.toUpperCase();
-        console.log(letter);
-        console.log(this.newWord);
+        //console.log(letter);
+        //console.log(this.newWord);
 
         e.classList.add('clicked');
 
