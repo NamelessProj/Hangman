@@ -14,6 +14,8 @@ And if you've won or loose, a new button appear so you can continue playing.
 
 To make a guess, there's a button with every letters, you just have to click on the letter you want. Once you have clicked a letter, you cannot clicked it again.
 
+You can also make a guess with your keyboard if you are on a computer.
+
 ### Score
 
 The number of word you have guess consecutively is saved and the same goes for your reccord, so try to do your best.
