@@ -15,16 +15,25 @@ body{
     height: 100dvh;
 }
 
-.dialog-cont{
+dialog{
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
     background: rgb(200 200 200 / .5);
     backdrop-filter: blur(2px);
+    outline: none;
+    border: none;
+    border-radius: 1rem;
     @include item-center-grid;
+    &::backdrop{
+        background: rgb(0 0 0 / .5);
+        backdrop-filter: blur(1px);
+    }
     .dialog{
+        display: none;
         position: relative;
         padding: 30px;
-        border-radius: 1rem;
         background: rgb(150 150 150);
         box-shadow: 0 0 15px rgb(15 15 15 / .5);
         text-align: center;
@@ -48,6 +57,7 @@ body{
             margin-bottom: 15px;
         }
     }
+    &[open] .dialog{display: block;}
 }
 
 #cont{
@@ -63,12 +73,16 @@ body{
     }
     .useless{
         @include item-center-grid;
-        padding-bottom: 15px;
+        padding: 15px;
         border-bottom: 1px solid #d4d4d4;
         font-size: .9rem;
         color: #888888;
         strong{
             cursor: default;
+        }
+        &.footer{
+            border-bottom: none;
+            border-top: 1px solid #d4d4d4;
         }
     }
     .scores{
@@ -109,11 +123,12 @@ body{
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
         gap: .5rem;
         user-select: none;
         .word-seek-letter{
             width: 3rem;
-            height: 3rem;
+            aspect-ratio: 1;
             font-size: 1.5rem;
             font-weight: 700;
             background: #d4d4d4;
@@ -126,7 +141,7 @@ body{
     }
     .buttons{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: flex-start;
         flex-wrap: wrap;
         gap: 1rem;
