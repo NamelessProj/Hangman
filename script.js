@@ -13,6 +13,8 @@ const wordSeekSection = document.querySelector('.word-seek');
 const remainingLiveEl = document.querySelector('.current-live');
 const totalLiveEl = document.querySelector('.total-live');
 
+const dialogHangman = document.querySelector('[data-hangman-dialog]');
+
 var existingHangmanScore = JSON.parse(localStorage.getItem('hangmanScore')) || 0;
 var existingHangmanMaxScore = JSON.parse(localStorage.getItem('hangmanMaxScore')) || 0;
 
@@ -34,13 +36,10 @@ class Hangman {
         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
-    generate_word(){       
-        //console.log(this.newWord);
-
+    generate_word(){
         var newWord = this.toNormalForm(DICTIONARY_ENG[Math.floor(Math.random()*DICTIONARY_ENG.length)].toUpperCase());
 
         wordSeekSection.innerHTML = '';
-        //console.log(newWord);
 
         this.newWord = newWord;
         this.live = 9; // reset the live
@@ -49,7 +48,6 @@ class Hangman {
         totalLiveEl.innerText = remainingLiveEl.innerText = this.live;
 
         for(let i = 0; i < newWord.length; i++){
-            //console.log(newWord[i]);
             if(/^[a-zA-Z]/.test(newWord[i])){
                 wordSeekSection.innerHTML += '<div class="word-seek-letter" data-letter-box="'+i+'"></div>';
                 this.wordLength++;
@@ -59,7 +57,6 @@ class Hangman {
                 wordSeekSection.innerHTML += '<div class="word-seek-letter space"></div>';
             }
         }
-        //console.log(this.wordLength);
     }
 
     again(){
@@ -67,14 +64,20 @@ class Hangman {
         document.querySelector('.options').innerHTML += btn;
     }
 
-    check_letter(e){
-        if(e.classList.contains('clicked')) return;
+    check_letter(e, btnLetter=false, place){
+        var letter;
+        place++;
 
-        var letter = e.innerText.toUpperCase();
-        //console.log(letter);
-        //console.log(this.newWord);
-
-        e.classList.add('clicked');
+        if(btnLetter && place){
+            var placeBtn = document.querySelector('[data-letter]:nth-child('+place+')');
+            if(placeBtn.classList.contains('clicked')) return;
+            letter = btnLetter;
+            placeBtn.classList.add('clicked');
+        }else if(e){
+            if(e.classList.contains('clicked')) return;
+            letter = e.innerText.toUpperCase();
+            e.classList.add('clicked');
+        }else{return;}
 
         if(this.newWord.includes(letter)){
             for(let i = 0; i < this.newWord.length; i++){
@@ -116,11 +119,12 @@ class Hangman {
     }
 
     dialog(title, text){
-        var text = `<div class="dialog" data-hangman-dialog="${this.totalDialog}"><button type="button" class="close-dialog" onclick="hangman.close_dialog(${this.totalDialog});">${this.closeIcon}</button><h2>${title}</h2><div>${text}</div><h3>${this.newWord}</h3></div>`;
+        dialogHangman.showModal();
 
-        var dialogCont = `<div class="dialog-cont" data-hangman-dialog="${this.totalDialog}">${text}</div>`;
-        this.totalDialog++;
-        document.body.innerHTML += dialogCont;
+        document.querySelector('[data-hangman-dialog] .dialog h2').innerText = title;
+        document.querySelector('[data-hangman-dialog] .dialog div').innerText = text;
+        document.querySelector('[data-hangman-dialog] .dialog h3').innerText = this.newWord;
+
         this.again();
     }
 
@@ -141,9 +145,24 @@ inputBtns.forEach(btn => {
     });
 });
 
+document.querySelector('button.close-dialog').addEventListener('click', () => {
+    dialogHangman.close();
+});
+
 document.querySelector('.retry-btn').addEventListener('click', () => {
     hangman.generate_word();
 });
 
 document.querySelector('.total-words-num').innerText = formatterCompact.format(totalWord);
 document.querySelector('.total-words-num').title = formatterStandard.format(totalWord);
+
+
+
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+document.onkeydown = function(e) {
+    var letter = e.key.toUpperCase();
+    if(alphabet.includes(letter)){
+        var place = alphabet.indexOf(letter);
+        hangman.check_letter(false, letter, place);
+    }
+};
