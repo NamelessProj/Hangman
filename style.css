@@ -10,42 +10,55 @@ body {
   height: 100dvh;
 }
 
-.dialog-cont {
+dialog {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
   background: rgba(200, 200, 200, 0.5);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
+  outline: none;
+  border: none;
+  border-radius: 1rem;
   display: grid;
   place-items: center;
 }
-.dialog-cont .dialog {
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+}
+dialog .dialog {
+  display: none;
   position: relative;
   padding: 30px;
-  border-radius: 1rem;
   background: rgb(150, 150, 150);
   box-shadow: 0 0 15px rgba(15, 15, 15, 0.5);
   text-align: center;
 }
-.dialog-cont .dialog button {
+dialog .dialog button {
   background: rgba(250, 250, 250, 0.5);
   padding: 0.2rem;
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
 }
-.dialog-cont .dialog .close-dialog {
+dialog .dialog .close-dialog {
   position: absolute;
   top: 15px;
   right: 15px;
   display: grid;
   place-items: center;
 }
-.dialog-cont .dialog .close-dialog :is(:hover, :focus, :focus-visible) {
+dialog .dialog .close-dialog :is(:hover, :focus, :focus-visible) {
   fill: red;
 }
-.dialog-cont .dialog :is(h2, h3, div) {
+dialog .dialog :is(h2, h3, div) {
   margin-bottom: 15px;
+}
+dialog[open] .dialog {
+  display: block;
 }
 
 #cont {
@@ -63,13 +76,17 @@ body {
 #cont .useless {
   display: grid;
   place-items: center;
-  padding-bottom: 15px;
+  padding: 15px;
   border-bottom: 1px solid #d4d4d4;
   font-size: 0.9rem;
   color: #888888;
 }
 #cont .useless strong {
   cursor: default;
+}
+#cont .useless.footer {
+  border-bottom: none;
+  border-top: 1px solid #d4d4d4;
 }
 #cont .scores {
   max-width: 800px;
@@ -110,6 +127,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -117,7 +135,7 @@ body {
 }
 #cont .word-seek .word-seek-letter {
   width: 3rem;
-  height: 3rem;
+  aspect-ratio: 1;
   font-size: 1.5rem;
   font-weight: 700;
   background: #d4d4d4;
@@ -130,7 +148,7 @@ body {
 }
 #cont .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
