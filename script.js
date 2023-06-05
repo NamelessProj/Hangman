@@ -36,7 +36,7 @@ class Hangman {
         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
-    generate_word(){
+    generate_word(retry = false){
         var newWord = this.toNormalForm(DICTIONARY_ENG[Math.floor(Math.random()*DICTIONARY_ENG.length)].toUpperCase());
 
         wordSeekSection.innerHTML = '';
@@ -56,6 +56,12 @@ class Hangman {
             }else{
                 wordSeekSection.innerHTML += '<div class="word-seek-letter space"></div>';
             }
+        }
+        
+        if(retry){
+            document.querySelectorAll('[data-letter].clicked').forEach(el => {
+                el.classList.remove('clicked');
+            });
         }
     }
 
@@ -150,7 +156,7 @@ document.querySelector('button.close-dialog').addEventListener('click', () => {
 });
 
 document.querySelector('.retry-btn').addEventListener('click', () => {
-    hangman.generate_word();
+    hangman.generate_word(true);
 });
 
 document.querySelector('.total-words-num').innerText = formatterCompact.format(totalWord);
