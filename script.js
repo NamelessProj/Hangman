@@ -15,6 +15,26 @@ const totalLiveEl = document.querySelector('.total-live');
 
 const dialogHangman = document.querySelector('[data-hangman-dialog]');
 
+const btnShakeAnimation = [
+    { transform: "rotate(0);" },
+    { transform: "rotate(15deg);" },
+    { transform: "rotate(0);" },
+    { transform: "rotate(-15deg)" },
+    { transform: "rotate(0)" },
+    { transform: "rotate(15deg);" },
+    { transform: "rotate(0);" },
+    { transform: "rotate(-15deg)" },
+    { transform: "rotate(0)" },
+    { transform: "rotate(15deg);" },
+    { transform: "rotate(0);" },
+    { transform: "rotate(-15deg)" },
+    { transform: "rotate(0)" },
+];
+const btnShakeTiming = {
+    duration: 300,
+    iteration: 1,
+};
+
 var existingHangmanScore = JSON.parse(localStorage.getItem('hangmanScore')) || 0;
 var existingHangmanMaxScore = JSON.parse(localStorage.getItem('hangmanMaxScore')) || 0;
 
@@ -76,11 +96,17 @@ class Hangman {
 
         if(btnLetter && place){
             var placeBtn = document.querySelector('[data-letter]:nth-child('+place+')');
-            if(placeBtn.classList.contains('clicked')) return;
+            if(placeBtn.classList.contains('clicked')){
+                placeBtn.animate(btnShakeAnimation, btnShakeTiming);
+                return;
+            };
             letter = btnLetter;
             placeBtn.classList.add('clicked');
         }else if(e){
-            if(e.classList.contains('clicked')) return;
+            if(e.classList.contains('clicked')){
+                e.animate(btnShakeAnimation, btnShakeTiming);
+                return;
+            };
             letter = e.innerText.toUpperCase();
             e.classList.add('clicked');
         }else{return;}
