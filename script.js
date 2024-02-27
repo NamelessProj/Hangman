@@ -35,8 +35,8 @@ const btnShakeTiming = {
     iteration: 1,
 };
 
-var existingHangmanScore = JSON.parse(localStorage.getItem('hangmanScore')) || 0;
-var existingHangmanMaxScore = JSON.parse(localStorage.getItem('hangmanMaxScore')) || 0;
+let existingHangmanScore = JSON.parse(localStorage.getItem('hangmanScore')) || 0;
+let existingHangmanMaxScore = JSON.parse(localStorage.getItem('hangmanMaxScore')) || 0;
 
 document.querySelector('.consecutive').innerText = existingHangmanScore;
 
@@ -78,7 +78,7 @@ class Hangman {
             }
         }
         
-        if(retry){
+        if(retry && existingHangmanScore < existingHangmanMaxScore){
             document.querySelectorAll('[data-letter].clicked').forEach(el => {
                 el.classList.remove('clicked');
             });
