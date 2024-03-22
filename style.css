@@ -153,6 +153,8 @@ dialog[open] .dialog {
   flex-wrap: wrap;
   gap: 1rem;
   padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 #cont .buttons button {
   width: 30px;
